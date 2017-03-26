@@ -10,12 +10,12 @@ LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 
-class Snippet(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='snippets')
+class Product(models.Model):
+    owner = models.ForeignKey('auth.User', related_name='products')
     highlighted = models.TextField(default='')
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
-    code = models.TextField(default='')
+    image_source = models.TextField(default='')
     linenos = models.BooleanField(default=False)
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
     style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
@@ -25,7 +25,7 @@ class Snippet(models.Model):
     def save(self, *args, **kwargs):
         """
         Use the `pygments` library to create a highlighted HTML
-        representation of the code snippet.
+        representation of the code product.
         """
         lexer = get_lexer_by_name(self.language)
         linenos = self.linenos and 'table' or False
@@ -33,7 +33,7 @@ class Snippet(models.Model):
         formatter = HtmlFormatter(style=self.style, linenos=linenos,
                                   full=True, **options)
         self.highlighted = highlight(self.code, lexer, formatter)
-        super(Snippet, self).save(*args, **kwargs)
+        super(Product, self).save(*args, **kwargs)
 
 
     class Meta:

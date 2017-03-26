@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from snippets import views
+from products import views
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
 
@@ -8,7 +8,7 @@ from rest_framework.schemas import get_schema_view
 
 
 router = DefaultRouter()
-router.register(r'snippets', views.SnippetViewSet)
+router.register(r'products', views.ProductViewSet)
 router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.

@@ -1,9 +1,9 @@
-from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
+from products.models import Product
+from products.serializers import ProductSerializer
 from rest_framework import generics
-from snippets.serializers import UserSerializer
+from products.serializers import UserSerializer
 from rest_framework import permissions
-from snippets.permissions import IsOwnerOrReadOnly
+from products.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework import renderers
@@ -15,26 +15,26 @@ from rest_framework.decorators import detail_route
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
+        'products': reverse('product-list', request=request, format=format)
     })
 
 
-class SnippetViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
 
     Additionally we also provide an extra `highlight` action.
     """
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)
+        product = self.get_object()
+        return Response(product.highlighted)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
