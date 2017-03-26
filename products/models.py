@@ -18,10 +18,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     image_source = models.TextField(default='')
     metod = models.CharField(choices=malowanie, default='', max_length=100)
-    linenos = models.BooleanField(default=False)
-    language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
-    style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
-
+    price = models.CharField(max_length=100, default='', blank=True)
 
 
     def save(self, *args, **kwargs):
