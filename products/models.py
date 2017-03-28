@@ -5,7 +5,6 @@ from pygments.lexers import get_lexer_by_name
 from pygments.formatters.html import HtmlFormatter
 from pygments import highlight
 
-
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
@@ -16,9 +15,10 @@ class Product(models.Model):
     highlighted = models.TextField(default='')
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
-    image_source = models.TextField(default='')
+    image_source = models.ImageField(default='')
     metod = models.CharField(choices=malowanie, default='', max_length=100)
     price = models.CharField(max_length=100, default='', blank=True)
+
 
 
     def save(self, *args, **kwargs):

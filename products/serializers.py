@@ -9,7 +9,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
         fields = ('url', 'id', 'highlight', 'owner',
-                  'title','metod', 'image_source', 'price')
+                  'title','metod', 'image_source', 'price',)
 
 
 
