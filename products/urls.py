@@ -2,6 +2,8 @@ from django.conf.urls import url, include
 from products import views
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
+from django.conf.urls.static import static
+from django.conf import settings
 
 # Create a router and register our viewsets with it.
 
