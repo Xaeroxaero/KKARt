@@ -5,6 +5,7 @@ from rest_framework.schemas import get_schema_view
 from django.conf.urls.static import static
 from django.conf import settings
 
+
 # Create a router and register our viewsets with it.
 
 
@@ -12,6 +13,7 @@ from django.conf import settings
 router = DefaultRouter()
 router.register(r'products', views.ProductViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'news', views.NewViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.

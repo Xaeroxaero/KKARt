@@ -124,6 +124,17 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
+
+
+CLOUDINARY = {
+  'cloud_name': 'dsl1cwi6h',
+  'api_key': '963228162677574',
+  'api_secret': '9MbJ-F9W5tNb7u0Xu7ehYb4ZktE',
+}
+
+
+
+
 MEDIA_URL = '/media/'
 
 

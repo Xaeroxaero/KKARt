@@ -10,12 +10,16 @@ from rest_framework import renderers
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
+from products.serializers import NewSerializer
+from products.models import New
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'products': reverse('product-list', request=request, format=format)
+        'products': reverse('product-list', request=request, format=format),
+        'news': reverse('new-list', request=request, format=format)
     })
 
 
@@ -48,3 +52,19 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class NewViewSet(viewsets.ModelViewSet):
+
+
+    queryset = New.objects.all()
+    serializer_class = NewSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)
+
+    @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
+    def highlight(self, request, *args, **kwargs):
+        new = self.get_object()
+        return Response(new.highlighted)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
