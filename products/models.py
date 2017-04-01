@@ -9,7 +9,7 @@ class Product(models.Model):
     highlighted = models.TextField(default='')
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
-    image_source = models.ImageField(upload_to='images/')
+    image_source = models.ImageField(upload_to='products/images/')
     metod = models.CharField(choices=malowanie, default='', max_length=100)
     price = models.CharField(max_length=100, default='', blank=True)
 

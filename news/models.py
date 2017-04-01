@@ -7,7 +7,7 @@ class New(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
     news = models.TextField(default='')
-
+    image_source = models.ImageField(upload_to='news/images/')
 
     class Meta:
         ordering = ('created',)
