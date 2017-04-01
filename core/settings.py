@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '%jkmq^y0no*k$etd9m!=1-%77k3fgr6*n_#yvl(r^%j_q+e4r%'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -72,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -82,7 +79,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -102,7 +98,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -116,7 +111,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
@@ -126,17 +120,14 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-
 CLOUDINARY = {
-  'cloud_name': 'dsl1cwi6h',
-  'api_key': '963228162677574',
-  'api_secret': '9MbJ-F9W5tNb7u0Xu7ehYb4ZktE',
+    'cloud_name': 'dsl1cwi6h',
+    'api_key': '963228162677574',
+    'api_secret': '9MbJ-F9W5tNb7u0Xu7ehYb4ZktE',
 }
-
-
-
 
 MEDIA_URL = '/media/'
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PRODUCTS_ROOT = 'products/images/'

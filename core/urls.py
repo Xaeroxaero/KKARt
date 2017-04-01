@@ -13,19 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from django.conf.urls import url, include
-from news import views as views1
-from products import views as views2
+from news import views as views_news
+from products import views as views_products
 from rest_framework.schemas import get_schema_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 router = DefaultRouter()
-router.register(r'products', views2.ProductViewSet)
-router.register(r'users', views2.UserViewSet)
-router.register(r'news', views1.NewViewSet)
+router.register(r'products', views_products.ProductViewSet)
+router.register(r'users', views_products.UserViewSet)
+router.register(r'news', views_news.NewViewSet)
 
 schema_view = get_schema_view(title='Pastebin API')
 
@@ -36,4 +36,4 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

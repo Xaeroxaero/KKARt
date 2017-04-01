@@ -1,5 +1,5 @@
 from django.db import models
-
+from core.settings import PRODUCTS_ROOT
 
 
 malowanie = [(1, 'akryl'), (2, 'olejna'), (3, 'akwarela')]
