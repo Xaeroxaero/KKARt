@@ -37,9 +37,8 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def perform_destroy(self, instance):
-        zmienna =os.path.join(MEDIA_ROOT, os.path.normpath(PRODUCTS_ROOT))
-        print(zmienna)
-        os.remove(zmienna + self)
+        image_directory = ((os.path.normpath(instance.image_source.path)))
+        os.remove.(image_directory)
         instance.delete()
 
 
