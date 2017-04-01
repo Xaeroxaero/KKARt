@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from news.serializers import NewSerializer
 from news.models import New
+from core.settings import os
 
 
 @api_view(['GET'])
@@ -33,3 +34,8 @@ class NewViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_destroy(self, instance):
+        image_directory = ((os.path.normpath(instance.image_source.path)))
+        os.remove.(image_directory)
+        instance.delete()
