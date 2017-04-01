@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from products.models import Product
 from django.contrib.auth.models import User
-from products.models import New
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -20,10 +19,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'id', 'username', 'products')
-
-class NewSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-
-    class Meta:
-        model = New
-        fields = ('owner', 'url', 'id', 'title', 'news')

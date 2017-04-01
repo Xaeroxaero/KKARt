@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 
-# Create a router and register our viewsets with it.
 
 
 
@@ -15,8 +14,7 @@ router.register(r'products', views.ProductViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'news', views.NewViewSet)
 
-# The API URLs are now determined automatically by the router.
-# Additionally, we include the login URLs for the browsable API.
+
 schema_view = get_schema_view(title='Pastebin API')
 
 urlpatterns = [
