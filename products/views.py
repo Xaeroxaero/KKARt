@@ -37,7 +37,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def perform_destroy(self, instance):
         image_directory = ((os.path.normpath(instance.image_source.path)))
-        os.remove.(image_directory)
+        os.remove(image_directory)
         instance.delete()
 
 
