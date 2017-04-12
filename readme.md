@@ -6,4 +6,4 @@ pip install pygments  # We'll be using this for the code highlighting,
 pip install django-contact-form
 pip install django-cors-headers
 pip install coreapi
-pip install Pillow
+pip install Pillow 4.0.0

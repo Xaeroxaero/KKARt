@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'products.apps.ProductsConfig',
     'news.apps.NewsConfig',
     'django',
-    'corsheaders'
+    'corsheaders',
+    'contact'
 ]
 
 MIDDLEWARE = [
@@ -134,8 +135,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8080'
 )
 
-CORS_ALLOW_METHODS = (
-    'DELETE',
+CORS_ALLOW_METHODS = ('DELETE',
     'GET',
     'OPTIONS',
     'PATCH',
@@ -143,5 +143,10 @@ CORS_ALLOW_METHODS = (
     'PUT',
 )
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
