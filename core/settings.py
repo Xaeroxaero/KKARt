@@ -143,10 +143,12 @@ CORS_ALLOW_METHODS = ('DELETE',
     'PUT',
 )
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'sendgrid_username'
-EMAIL_HOST_PASSWORD = 'sendgrid_password'
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tomasz.budzyn91@gmail.com'
+EMAIL_HOST_PASSWORD = 'p69hnjd1'
+DEFAULT_FROM_EMAIL = 'tomasz.budzyn91@gmail.com'
+DEFAULT_TO_EMAIL = 'tomasz.budzyn91@gmail.com'
 
 

@@ -8,7 +8,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from contact.serializers import ContactSerializer
 from contact.models import Contact
-from core.settings import os
+from core import settings
 from django.core.mail import send_mail
 
 @api_view(['GET'])
@@ -18,9 +18,7 @@ def api_root(request, format=None):
     })
 
 
-
 class ContactViewSet(viewsets.ModelViewSet):
-
 
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
@@ -33,10 +31,9 @@ class ContactViewSet(viewsets.ModelViewSet):
         return Response(new.highlighted)
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
-        print(send_mail('Subject here', 'Here is the message.', 'from@example.com',
-                  ['to@example.com'], fail_silently=False))
+        send_mail(serializer.data['subject'], serializer.data['body'], serializer.data['email'],
+                    ['tomasz.budzyn91@gmail.com'], fail_silently=False)
 
     def perform_destroy(self, instance):
         instance.delete()

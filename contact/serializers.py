@@ -2,8 +2,7 @@ from rest_framework import serializers
 from contact.models import Contact
 
 
-class ContactSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
