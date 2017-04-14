@@ -22,8 +22,7 @@ class ContactViewSet(viewsets.ModelViewSet):
 
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
@@ -31,9 +30,10 @@ class ContactViewSet(viewsets.ModelViewSet):
         return Response(new.highlighted)
 
     def perform_create(self, serializer):
+        print(serializer.data['email'])
 
         send_mail(serializer.data['subject'], serializer.data['body'], serializer.data['email'],
-                    ['tomasz.budzyn91@gmail.com'], fail_silently=False)
+                  ['tomasz.budzyn91@gmail.com'], fail_silently=False)
 
     def perform_destroy(self, instance):
         instance.delete()

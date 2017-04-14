@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -146,9 +147,6 @@ CORS_ALLOW_METHODS = ('DELETE',
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'tomasz.budzyn91@gmail.com'
+EMAIL_HOST_USER = 'tomasz.budzyn91'
 EMAIL_HOST_PASSWORD = 'p69hnjd1'
-DEFAULT_FROM_EMAIL = 'tomasz.budzyn91@gmail.com'
-DEFAULT_TO_EMAIL = 'tomasz.budzyn91@gmail.com'
-
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
