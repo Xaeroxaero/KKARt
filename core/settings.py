@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'django',
     'corsheaders',
-    'contact'
+    'contact',
+    'versatileimagefield',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'tomasz.budzyn91'
 EMAIL_HOST_PASSWORD = 'p69hnjd1'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DATETIME_INPUT_FORMATS = ['%m/%d/%Y %H:%M']
