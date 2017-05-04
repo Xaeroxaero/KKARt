@@ -1,5 +1,5 @@
 from django.db import models
-
+from versatileimagefield.fields import VersatileImageField, PPOIField
 
 malowanie = [(1, 'akryl'), (2, 'olejna'), (3, 'akwarela')]
 
@@ -10,11 +10,14 @@ class Product(models.Model):
     highlighted = models.TextField(default='')
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
-    image_source = models.ImageField(upload_to='products/images/', default='')
-    metod = models.CharField(choices=malowanie, default='', max_length=100)
+    image_source = VersatileImageField('Image_source', upload_to='products/images/', ppoi_field='image_source_ppoi',
+                                       default='')
+    about = models.TextField(default='')
+    metod = models.CharField(max_length=100, default='', blank=True)
     price = models.CharField(max_length=100, default='', blank=True)
+    painting_size = models.CharField(max_length=100, default='', blank=True)
 
-
+    image_source_ppoi = PPOIField()
 
 
 
