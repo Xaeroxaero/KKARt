@@ -1,15 +1,17 @@
+from django.contrib.auth.models import User
+from rest_framework import permissions
+from rest_framework import renderers
+from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+from products.models import Product
+from products.permissions import IsOwnerOrReadOnly
 from products.serializers import ProductSerializer
 from products.serializers import UserSerializer
-from rest_framework import permissions
-from products.permissions import IsOwnerOrReadOnly
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from rest_framework import renderers
-from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework.decorators import detail_route
-from django.contrib.auth.models import User
-from products.models import Product
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -49,5 +51,3 @@ class ProductViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-

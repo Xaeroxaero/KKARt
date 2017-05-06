@@ -1,15 +1,14 @@
-from rest_framework import permissions
-from products.permissions import IsOwnerOrReadOnly
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from rest_framework import renderers
-from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework.decorators import detail_route
-from contact.serializers import ContactSerializer
-from contact.models import Contact
-from core import settings
 from django.core.mail import send_mail
+from rest_framework import renderers
+from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
+from contact.models import Contact
+from contact.serializers import ContactSerializer
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -19,10 +18,8 @@ def api_root(request, format=None):
 
 
 class ContactViewSet(viewsets.ModelViewSet):
-
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
-
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):

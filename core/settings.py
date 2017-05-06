@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -139,12 +138,12 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 CORS_ALLOW_METHODS = ('DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
+                      'GET',
+                      'OPTIONS',
+                      'PATCH',
+                      'POST',
+                      'PUT',
+                      )
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

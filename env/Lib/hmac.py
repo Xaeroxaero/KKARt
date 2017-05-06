@@ -3,9 +3,8 @@
 Implements the HMAC algorithm as described by RFC 2104.
 """
 
-import warnings as _warnings
-from _operator import _compare_digest as compare_digest
 import hashlib as _hashlib
+import warnings as _warnings
 
 trans_5C = bytes((x ^ 0x5C) for x in range(256))
 trans_36 = bytes((x ^ 0x36) for x in range(256))
@@ -15,7 +14,6 @@ trans_36 = bytes((x ^ 0x36) for x in range(256))
 digest_size = None
 
 
-
 class HMAC:
     """RFC 2104 HMAC class.  Also complies with RFC 4231.
 
@@ -23,7 +21,7 @@ class HMAC:
     """
     blocksize = 64  # 512-bit HMAC; can be changed in subclasses.
 
-    def __init__(self, key, msg = None, digestmod = None):
+    def __init__(self, key, msg=None, digestmod=None):
         """Create a new HMAC object.
 
         key:       key for the keyed hash object.
@@ -130,7 +128,8 @@ class HMAC:
         h = self._current()
         return h.hexdigest()
 
-def new(key, msg = None, digestmod = None):
+
+def new(key, msg=None, digestmod=None):
     """Create a new hashing object and return it.
 
     key: The starting key for the hash.

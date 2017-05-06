@@ -1,14 +1,15 @@
 from rest_framework import permissions
-from products.permissions import IsOwnerOrReadOnly
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
 from rest_framework import renderers
-from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 from rest_framework.decorators import detail_route
-from news.serializers import NewSerializer
-from news.models import New
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+
 from core.settings import os
+from news.models import New
+from news.serializers import NewSerializer
+from products.permissions import IsOwnerOrReadOnly
 
 
 @api_view(['GET'])
@@ -18,10 +19,7 @@ def api_root(request, format=None):
     })
 
 
-
 class NewViewSet(viewsets.ModelViewSet):
-
-
     queryset = New.objects.all()
     serializer_class = NewSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
@@ -35,4 +33,3 @@ class NewViewSet(viewsets.ModelViewSet):
         image_directory = ((os.path.normpath(instance.image_source.path)))
         os.remove(image_directory)
         instance.delete()
-
