@@ -27,7 +27,9 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def remove_object(self, instance):
-        instance.image_source.delete_all_created_images()
+        print(instance.image_source)
+        instance.image_source.filters.water.delete()
+        instance.image_source.thumbnail['800x800'].delete()
         instance.image_source.delete(save=False)
 
     def perform_create(self, serializer):
