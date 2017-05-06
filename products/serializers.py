@@ -1,9 +1,8 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from versatileimagefield.serializers import VersatileImageFieldSerializer
-
 from products.models import Product
-
+from django.contrib.auth.models import User
+from versatileimagefield.serializers import VersatileImageFieldSerializer
+from .filters import WatermarkImage
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

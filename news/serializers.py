@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from news.models import New
 
 
@@ -8,4 +7,4 @@ class NewSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = New
-        fields = ('owner', 'url', 'id', 'title', 'news', 'image_source', 'created')
+        fields = ('owner', 'url', 'id', 'title', 'news', 'image_source','created')
