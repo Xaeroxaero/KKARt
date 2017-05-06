@@ -35,3 +35,4 @@ class NewViewSet(viewsets.ModelViewSet):
         image_directory = ((os.path.normpath(instance.image_source.path)))
         os.remove(image_directory)
         instance.delete()
+

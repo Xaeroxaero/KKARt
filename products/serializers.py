@@ -2,13 +2,13 @@ from rest_framework import serializers
 from products.models import Product
 from django.contrib.auth.models import User
 from versatileimagefield.serializers import VersatileImageFieldSerializer
-
+from .filters import WatermarkImage
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     image_source = VersatileImageFieldSerializer(
         sizes=[
-            ('full_size', 'url'),
+            ('full_size', 'filters__water__url'),
             ('thumbnail', 'thumbnail__800x800')
         ]
     )
@@ -25,4 +25,3 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'id', 'username', 'products')
-

@@ -11,7 +11,6 @@ from rest_framework.decorators import detail_route
 from django.contrib.auth.models import User
 from products.models import Product
 
-
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
@@ -27,21 +26,21 @@ class ProductViewSet(viewsets.ModelViewSet):
                           IsOwnerOrReadOnly,)
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
+    def remove_object(self, instance):
+        instance.image_source.delete_all_created_images()
+        instance.image_source.delete(save=False)
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
         print(serializer)
 
     def perform_destroy(self, instance):
-        instance.image_source.delete_all_created_images()
-        instance.image_source.delete(save=False)
+        self.remove_object(instance)
         instance.delete()
 
     def perform_update(self, serializer):
         instance = self.get_object()
-        print(instance.image_source)
-        instance.image_source.delete_all_created_images()
-        instance.image_source.delete(save=False)
+        self.remove_object(instance)
         serializer.save()
 
 
