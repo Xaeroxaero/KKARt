@@ -1,6 +1,7 @@
 from django.db import models
 from versatileimagefield.fields import VersatileImageField, PPOIField
 
+
 malowanie = [(1, 'akryl'), (2, 'olejna'), (3, 'akwarela')]
 
 
