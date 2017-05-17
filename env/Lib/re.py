@@ -120,10 +120,9 @@ This module also defines an exception 'error'.
 """
 
 import enum
-import functools
 import sre_compile
 import sre_parse
-
+import functools
 try:
     import _locale
 except ImportError:
@@ -140,15 +139,14 @@ __all__ = [
 
 __version__ = "2.2.1"
 
-
 class RegexFlag(enum.IntFlag):
-    ASCII = sre_compile.SRE_FLAG_ASCII  # assume ascii "locale"
-    IGNORECASE = sre_compile.SRE_FLAG_IGNORECASE  # ignore case
-    LOCALE = sre_compile.SRE_FLAG_LOCALE  # assume current 8-bit locale
-    UNICODE = sre_compile.SRE_FLAG_UNICODE  # assume unicode "locale"
-    MULTILINE = sre_compile.SRE_FLAG_MULTILINE  # make anchors look for newline
-    DOTALL = sre_compile.SRE_FLAG_DOTALL  # make dot match newline
-    VERBOSE = sre_compile.SRE_FLAG_VERBOSE  # ignore whitespace and comments
+    ASCII = sre_compile.SRE_FLAG_ASCII # assume ascii "locale"
+    IGNORECASE = sre_compile.SRE_FLAG_IGNORECASE # ignore case
+    LOCALE = sre_compile.SRE_FLAG_LOCALE # assume current 8-bit locale
+    UNICODE = sre_compile.SRE_FLAG_UNICODE # assume unicode "locale"
+    MULTILINE = sre_compile.SRE_FLAG_MULTILINE # make anchors look for newline
+    DOTALL = sre_compile.SRE_FLAG_DOTALL # make dot match newline
+    VERBOSE = sre_compile.SRE_FLAG_VERBOSE # ignore whitespace and comments
     A = ASCII
     I = IGNORECASE
     L = LOCALE
@@ -157,16 +155,13 @@ class RegexFlag(enum.IntFlag):
     S = DOTALL
     X = VERBOSE
     # sre extensions (experimental, don't rely on these)
-    TEMPLATE = sre_compile.SRE_FLAG_TEMPLATE  # disable backtracking
+    TEMPLATE = sre_compile.SRE_FLAG_TEMPLATE # disable backtracking
     T = TEMPLATE
-    DEBUG = sre_compile.SRE_FLAG_DEBUG  # dump pattern after compilation
-
-
+    DEBUG = sre_compile.SRE_FLAG_DEBUG # dump pattern after compilation
 globals().update(RegexFlag.__members__)
 
 # sre exception
 error = sre_compile.error
-
 
 # --------------------------------------------------------------------
 # public interface
@@ -176,18 +171,15 @@ def match(pattern, string, flags=0):
     a match object, or None if no match was found."""
     return _compile(pattern, flags).match(string)
 
-
 def fullmatch(pattern, string, flags=0):
     """Try to apply the pattern to all of the string, returning
     a match object, or None if no match was found."""
     return _compile(pattern, flags).fullmatch(string)
 
-
 def search(pattern, string, flags=0):
     """Scan through string looking for a match to the pattern, returning
     a match object, or None if no match was found."""
     return _compile(pattern, flags).search(string)
-
 
 def sub(pattern, repl, string, count=0, flags=0):
     """Return the string obtained by replacing the leftmost
@@ -197,7 +189,6 @@ def sub(pattern, repl, string, count=0, flags=0):
     a callable, it's passed the match object and must return
     a replacement string to be used."""
     return _compile(pattern, flags).sub(repl, string, count)
-
 
 def subn(pattern, repl, string, count=0, flags=0):
     """Return a 2-tuple containing (new_string, number).
@@ -210,7 +201,6 @@ def subn(pattern, repl, string, count=0, flags=0):
     return a replacement string to be used."""
     return _compile(pattern, flags).subn(repl, string, count)
 
-
 def split(pattern, string, maxsplit=0, flags=0):
     """Split the source string by the occurrences of the pattern,
     returning a list containing the resulting substrings.  If
@@ -220,7 +210,6 @@ def split(pattern, string, maxsplit=0, flags=0):
     and the remainder of the string is returned as the final element
     of the list."""
     return _compile(pattern, flags).split(string, maxsplit)
-
 
 def findall(pattern, string, flags=0):
     """Return a list of all non-overlapping matches in the string.
@@ -232,7 +221,6 @@ def findall(pattern, string, flags=0):
     Empty matches are included in the result."""
     return _compile(pattern, flags).findall(string)
 
-
 def finditer(pattern, string, flags=0):
     """Return an iterator over all non-overlapping matches in the
     string.  For each match, the iterator returns a match object.
@@ -240,28 +228,23 @@ def finditer(pattern, string, flags=0):
     Empty matches are included in the result."""
     return _compile(pattern, flags).finditer(string)
 
-
 def compile(pattern, flags=0):
     "Compile a regular expression pattern, returning a pattern object."
     return _compile(pattern, flags)
-
 
 def purge():
     "Clear the regular expression caches"
     _cache.clear()
     _compile_repl.cache_clear()
 
-
 def template(pattern, flags=0):
     "Compile a template pattern, returning a pattern object"
-    return _compile(pattern, flags | T)
-
+    return _compile(pattern, flags|T)
 
 _alphanum_str = frozenset(
     "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890")
 _alphanum_bytes = frozenset(
     b"_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890")
-
 
 def escape(pattern):
     """
@@ -292,7 +275,6 @@ def escape(pattern):
                     s.append(c)
         return bytes(s)
 
-
 # --------------------------------------------------------------------
 # internals
 
@@ -301,8 +283,6 @@ _cache = {}
 _pattern_type = type(sre_compile.compile("", 0))
 
 _MAXCACHE = 512
-
-
 def _compile(pattern, flags):
     # internal: compile pattern
     try:
@@ -331,18 +311,15 @@ def _compile(pattern, flags):
         _cache[type(pattern), pattern, flags] = p, loc
     return p
 
-
 @functools.lru_cache(_MAXCACHE)
 def _compile_repl(repl, pattern):
     # internal: compile replacement pattern
     return sre_parse.parse_template(repl, pattern)
 
-
 def _expand(pattern, match, template):
     # internal: match.expand implementation hook
     template = sre_parse.parse_template(template, pattern)
     return sre_parse.expand_template(template, match)
-
 
 def _subx(pattern, template):
     # internal: pattern.sub/subn implementation helper
@@ -350,24 +327,18 @@ def _subx(pattern, template):
     if not template[0] and len(template[1]) == 1:
         # literal replacement
         return template[1][0]
-
     def filter(match, template=template):
         return sre_parse.expand_template(template, match)
-
     return filter
-
 
 # register myself for pickling
 
 import copyreg
 
-
 def _pickle(p):
     return _compile, (p.pattern, p.flags)
 
-
 copyreg.pickle(_pattern_type, _pickle, _compile)
-
 
 # --------------------------------------------------------------------
 # experimental stuff (see python-dev discussions for details)
@@ -384,11 +355,10 @@ class Scanner:
             gid = s.opengroup()
             p.append(sre_parse.SubPattern(s, [
                 (SUBPATTERN, (gid, 0, 0, sre_parse.parse(phrase, flags))),
-            ]))
+                ]))
             s.closegroup(gid, p[-1])
         p = sre_parse.SubPattern(s, [(BRANCH, (None, p))])
         self.scanner = sre_compile.compile(p)
-
     def scan(self, string):
         result = []
         append = result.append
@@ -401,7 +371,7 @@ class Scanner:
             j = m.end()
             if i == j:
                 break
-            action = self.lexicon[m.lastindex - 1][1]
+            action = self.lexicon[m.lastindex-1][1]
             if callable(action):
                 self.match = m
                 action = action(self, m.group())

@@ -26,7 +26,7 @@ class WatermarkImage(FilteredImage):
         d = ImageDraw.Draw(txt)
 
         # draw text, half opacity
-        d.text((400, 400), "Hello", font=fnt, fill=(255, 255, 255, 128))
+        d.text((750, 2000), "Klaudia Kusik Art", font=fnt, fill=(255, 255, 255, 128))
 
         imagefile = BytesIO()
         inv_image = Image.alpha_composite(image, txt)

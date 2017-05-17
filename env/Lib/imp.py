@@ -6,8 +6,10 @@ functionality over this module.
 
 """
 # (Probably) need to stay in _imp
-from _imp import (init_frozen, is_builtin, is_frozen)
-
+from _imp import (lock_held, acquire_lock, release_lock,
+                  get_frozen_object, is_frozen_package,
+                  init_frozen, is_builtin, is_frozen,
+                  _fix_co_filename)
 try:
     from _imp import create_dynamic
 except ImportError:
@@ -110,6 +112,7 @@ def get_suffixes():
 
 
 class NullImporter:
+
     """**DEPRECATED**
 
     Null import object.
@@ -128,6 +131,7 @@ class NullImporter:
 
 
 class _HackedGetData:
+
     """Compatibility support for 'file' arguments of various load_*()
     functions."""
 
@@ -155,6 +159,7 @@ class _HackedGetData:
 
 
 class _LoadSourceCompatibility(_HackedGetData, machinery.SourceFileLoader):
+
     """Compatibility support for implementing load_source()."""
 
 
@@ -173,6 +178,7 @@ def load_source(name, pathname, file=None):
 
 
 class _LoadCompiledCompatibility(_HackedGetData, SourcelessFileLoader):
+
     """Compatibility support for implementing load_compiled()."""
 
 
@@ -197,7 +203,7 @@ def load_package(name, path):
         extensions = (machinery.SOURCE_SUFFIXES[:] +
                       machinery.BYTECODE_SUFFIXES[:])
         for extension in extensions:
-            path = os.path.join(path, '__init__' + extension)
+            path = os.path.join(path, '__init__'+extension)
             if os.path.exists(path):
                 break
         else:
@@ -241,7 +247,7 @@ def load_module(name, file, filename, details):
     elif type_ == PY_FROZEN:
         return init_frozen(name)
     else:
-        msg = "Don't know how to import {} (type code {})".format(name, type_)
+        msg =  "Don't know how to import {} (type code {})".format(name, type_)
         raise ImportError(msg, name=name)
 
 
