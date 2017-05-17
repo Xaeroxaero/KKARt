@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'contact',
     'versatileimagefield',
-    'imagekit',
 ]
 
 MIDDLEWARE = [
