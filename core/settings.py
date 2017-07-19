@@ -24,7 +24,7 @@ SECRET_KEY = '%jkmq^y0no*k$etd9m!=1-%77k3fgr6*n_#yvl(r^%j_q+e4r%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-TEMPLATE_DEBUG = True
+
 ALLOWED_HOSTS = ['80.211.198.17', 'localhost', '127.0.0.1']
 
 # Application definition
@@ -135,9 +135,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = '/var/www/static'
+STATIC_ROOT = '/var/www/KKARt/static/'
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 9999
