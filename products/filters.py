@@ -21,7 +21,7 @@ class WatermarkImage(FilteredImage):
         txt = Image.new('RGBA', image.size, (255, 255, 255, 0))
 
         # get a font
-        fnt = ImageFont.truetype("arial.ttf", 200)
+        fnt = ImageFont.truetype("DejaVuSerif.ttf", 200)
         # get a drawing context
         d = ImageDraw.Draw(txt)
 
