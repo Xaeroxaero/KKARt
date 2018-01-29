@@ -1,0 +1,19 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+requests = "*"
+django = "*"
+djangorestframework = "*"
+django-cors-middleware = "*"
+django-versatileimagefield = "*"
+coreapi = "*"
+
+
+[dev-packages]
+
