@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'contact',
     'versatileimagefield',
-
+    'oauth2_provider'
 ]
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ]
 }
 MIDDLEWARE = [
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -118,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+OAUTH2_PROVIDER = {
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -141,9 +144,6 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 9999
-}
 
 MEDIA_URL = '/media/'
 

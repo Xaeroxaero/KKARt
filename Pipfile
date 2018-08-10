@@ -13,6 +13,8 @@ djangorestframework = "*"
 django-cors-middleware = "*"
 django-versatileimagefield = "*"
 coreapi = "*"
+pillow = "*"
+django-oauth-toolkit = "*"
 
 
 [dev-packages]

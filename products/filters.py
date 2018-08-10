@@ -21,7 +21,7 @@ class WatermarkImage(FilteredImage):
         txt = Image.new('RGBA', image.size, (255, 255, 255, 0))
 
         # get a font
-        fnt = ImageFont.truetype("DejaVuSerif.ttf", 200)
+        fnt = ImageFont.truetype("arial.ttf", 200)
         # get a drawing context
         d = ImageDraw.Draw(txt)
 
@@ -30,11 +30,13 @@ class WatermarkImage(FilteredImage):
 
         imagefile = BytesIO()
         inv_image = Image.alpha_composite(image, txt)
+        inv_image = inv_image.convert("RGB")
         inv_image.save(
             imagefile,
-            **save_kwargs
+            **save_kwargs,
         )
         print(imagefile)
         return imagefile
+
 
 versatileimagefield_registry.register_filter('water', WatermarkImage)

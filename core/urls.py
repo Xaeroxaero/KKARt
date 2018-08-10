@@ -35,6 +35,6 @@ schema_view = get_schema_view(title='Pastebin API')
 urlpatterns = [
     url('^schema/$', schema_view),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
